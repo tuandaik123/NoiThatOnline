@@ -1,0 +1,28 @@
+﻿@model NoiThat.Models.GioHang
+
+<style>
+    .circle {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 15px;
+        background-color: red;
+        color: white;
+        position: absolute;
+        transform: translate(-50%, -10%);
+    }
+
+    li {
+        margin-right: 15px;
+    }
+</style>
+
+<a id="navbar-content" href="@Url.Action("GioHang", "GioHang")">
+    <i class="fa fa-shopping-cart" aria-hidden="true" style="color: orange; position: relative;"></i>
+    @if (ViewBag.TongSoLuong1 != 0)
+    {
+        <span class="circle">@ViewBag.TongSoLuong1</span>
+    }
+</a>

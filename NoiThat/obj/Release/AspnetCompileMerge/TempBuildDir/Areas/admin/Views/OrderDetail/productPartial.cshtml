@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "productPartial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<NoiThat.Models.orderDetail>
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Danh sách</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Giá (VNĐ)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    var count = 1;
+                    foreach (var orderDetail in Model)
+                    {
+                        <tr>
+                            <td>@count</td>
+                            <td>@orderDetail.product.name</td>
+                            <td>@orderDetail.quantity</td>
+                            <td>@string.Format("{0:#,##0}", orderDetail.price)</td>
+                        </tr>
+                        count++;
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="4">Không có sản phẩm trong đơn hàng này.</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

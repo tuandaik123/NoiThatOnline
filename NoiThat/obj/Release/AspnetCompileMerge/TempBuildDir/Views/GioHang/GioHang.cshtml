@@ -1,0 +1,232 @@
+﻿
+
+@using NoiThat.Models
+@using PagedList.Mvc
+@model PagedList.PagedList<GioHang>
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khung HTML với CSS</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          rel="stylesheet" />
+    <!-- MDB -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.2/mdb.min.css"
+          rel="stylesheet" />
+    <style>
+        .pagination-container {
+            text-align: center;
+            margin-top: 20px; /* Add margin for spacing */
+        }
+
+        .pagination {
+            display: inline-block;
+        }
+
+            .pagination li {
+                display: inline;
+                margin: 0 5px;
+            }
+
+            .pagination a {
+                color: #333;
+                text-decoration: none;
+                padding: 8px 16px;
+                border: 2px solid #333;
+                border-radius: 4px;
+            }
+
+                .pagination a:hover, .pagination .active {
+                    height: 40px;
+                    width: 40px;
+                    background-color: #333;
+                    color: #fff;
+                    border: 2px solid #333;
+                }
+    </style>
+
+</head>
+<body>
+    <script>
+    function stepUp(input) {
+        input.value = Math.min(100, input.value + 1);
+    }
+
+    function datHangThanhCong() {
+        var taiKhoan = "@Session["TaiKhoan"]";
+        if (taiKhoan !== null && taiKhoan !== '') {
+            // Hiển thị thông báo
+            alert("Đặt hàng thành công!");
+        } else {
+            alert("Vui lòng đăng nhập để đặt hàng");
+        }
+    }
+    </script>
+
+
+    <div class="h-100 h-custom" style="background-color: #808080;">
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12">
+                    <div class="card card-registration card-registration-2" style="border-radius: 15px;">
+                        <div class="card-body p-0">
+                            <div class="row g-0">
+                                <div class="col-lg-8">
+                                    <div class="p-5">
+                                        <div class="d-flex justify-content-between align-items-center mb-5">
+                                            <h1 class="fw-bold mb-0 text-black">Giỏ Hàng</h1>
+                                        </div>
+                                        <hr class="my-4">
+                                        @foreach (var item in Model)
+                                        {
+                                            if (item != null)
+                                            {
+
+                                                <div class="row mb-4 d-flex justify-content-between align-items-center">
+                                                    <div class="col-md-2 col-lg-2 col-xl-2">
+                                                        <img src="~/images/@item.sImage"
+                                                             class="img-fluid rounded-3" alt="Cotton T-shirt">
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-3">
+                                                        <h6 class="text-muted">sản phẩm</h6>
+                                                        <a href="@Url.Action("chiTietSanPham", "NoiThatOnline", new { id = item.iProductId })"><h6 class="text-black mb-0">@item.sName</h6></a>
+                                                    </div>
+                                                    <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+                                                        @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { ms = item.iProductId }))
+                                                        {
+                                                            <div style="display: flex; align-items: center;">
+                                                                <div style="display: flex; align-items: center;">
+                                                                    <button class="btn btn-link px-2"
+                                                                            onclick="this.nextElementSibling.stepDown()">
+                                                                        <i class="fas fa-minus"></i>
+                                                                    </button>
+                                                                    <input id="form1" min="0" name="txtSoLuong" value="@item.quantity" type="number"
+                                                                           class="form-control form-control-sm" style="width:60px;" />
+                                                                    <button class="btn btn-link px-2"
+                                                                            onclick="this.previousElementSibling.stepUp()">
+                                                                        <i class="fas fa-plus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                    </div>
+
+
+                                                    <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+                                                        <h6 class="mb-0">@Html.FormatValue(item.price, "{0:#,##0}") VNĐ</h6>
+                                                    </div>
+                                                    <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                        <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+                                                            <a href="@Url.Action("XoaSPKhoiGioHang", new { iPr = item.iProductId })" class="text-muted"><i class="fas fa-times"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <hr class="my-4">
+                                            }
+                                        }
+                                        <div class="pt-5">
+                                            <h6 class="mb-0">
+                                                <a href="@Url.Action("Index", "NoiThatOnline")" class="text-body">
+                                                    <i class="fas fa-long-arrow-alt-left me-2"></i>Back to shop
+                                                </a>
+                                            </h6>
+                                            <div class="text-center pagination-container mb-4" style="margin-left:130px">
+                                                @Html.PagedListPager(Model, page => Url.Action("GioHang", new { page = page }))
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 bg-grey">
+                                    <div class="p-5">
+                                        <h2 style="margin-top:100px"></h2>
+                                        <hr class="my-4">
+                                        <div class="d-flex justify-content-between mb-4">
+                                            <h5 class="text-uppercase">Tổng Số Lượng : @ViewBag.TongSoLuong</h5>
+                                        </div>
+                                        @using (Html.BeginForm("DatHang", "GioHang"))
+                                        {
+                                            <h5 class="text-uppercase mb-3">Phương thức thanh toán</h5>
+                                            <div class="mb-4 pb-2">
+                                                <select class="select" name="paymentMethod" id="paymentMethod" onchange="handlePaymentMethodChange()">
+                                                    <option value="ocd">Thanh toán khi nhận hàng</option>
+                                                    <option value="banking">Chuyển Khoản</option>
+                                                </select>
+                                            </div>
+                                            <div class="mb-4 pb-2" id="paymentTypeContainer" style="display:none;">
+                                                <select class="select" name="paymentType">
+                                                    <option value="1">Cổng thanh toán VNPAY</option>
+                                                    <option value="VNPAYQR">Thanh toán qua ứng dụng VNPAYQR</option>
+                                                    <option value="VNBANK">Thanh toán qua thẻ nội địa</option>
+                                                    <option value="INTCARD">Thanh toán qua thẻ quốc tế</option>
+
+                                                </select>
+                                            </div>
+
+                                            <h5 class="text-uppercase mb-3">Mã giảm giá</h5>
+
+                                            <div class="mb-5">
+                                                <div class="form-outline">
+                                                    <input type="text" id="form3Examplea2" class="form-control form-control-lg" />
+                                                    <label class="form-label" for="form3Examplea2">Nhập mã giảm giá</label>
+                                                </div>
+                                            </div>
+
+                                            <hr class="my-4">
+
+                                            <div class="d-flex justify-content-between mb-5">
+                                                <h5 class="text-uppercase">Tổng tiền</h5>
+                                                <h5>@string.Format("{0:#,##0}", @ViewBag.TongTien) VNĐ</h5>
+                                            </div>
+
+                                            <a href="" onclick="datHangThanhCong()">
+                                                <input value="Đặt hàng" type="submit" class="btn btn-dark btn-block btn-lg"
+                                                       data-mdb-ripple-color="dark" />
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function handlePaymentMethodChange() {
+            var paymentMethod = document.getElementById("paymentMethod");
+            var paymentTypeContainer = document.getElementById("paymentTypeContainer");
+
+            if (paymentMethod.value == 1) {
+                paymentTypeContainer.style.display = "none";
+            } else {
+                paymentTypeContainer.style.display = "block";
+            }
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var scrollableContainer = document.querySelector('.scrollable-container');
+            if (scrollableContainer) {
+                scrollableContainer.scrollTop = scrollableContainer.scrollHeight;
+            }
+        });
+    </script>
+
+
+</body>
+
+

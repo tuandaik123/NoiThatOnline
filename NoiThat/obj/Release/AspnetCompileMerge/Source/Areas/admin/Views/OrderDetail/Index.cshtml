@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_adminLayout.cshtml";
+}
+@using (Html.BeginForm("XacNhanDon", "OrderDetail", new { id = @Model.order.id }))
+{
+    <div class="container">
+        <h3 style="margin-top:20px">Thông Tin Khách Hàng #DH@(Model.order.id)</h3>
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="row">
+                        @Html.Action("customersPartial", "OrderDetail", new { id = @Model.order.customer_id })
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="ngaytaodon">Trại thái thanh toán</label>
+                            <input type="text" class="form-control col-12"  value="@(Model.order.paymentStatus == 0 ? "Chưa thanh toán":"Đã thanh toán")" disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ngaytaodon">Phương thức thanh toán</label>
+                            <input type="text" class="form-control col-12" value="@Model.order.paymentMethod" disabled>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label for="ngaytaodon">Ngày tạo đơn</label>
+                            <input type="text" class="form-control col-12" id="ngaytaodon" name="orderDate" value="@Model.order.date_create" disabled>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ngaytaodon">Ngày giao hàng</label>
+                            <input type="date" class="form-control col-12" id="ngayGiao" name="ngayGiao">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <h3 style="margin-top:20px">Thông Tin Đơn Hàng</h3>
+        @Html.Action("productPartial", "OrderDetail", new { id = @Model.order.id })
+        <div class="row justify-content-end">
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-success btn-block">Duyệt đơn</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ngayGiaoInput = document.getElementById('ngayGiao');
+            var submitButton = document.querySelector('button[type="submit"]');
+
+            ngayGiaoInput.addEventListener('input', function () {
+                if (ngayGiaoInput.value.trim() !== "") {
+                    submitButton.disabled = false; // Enable the button
+                } else {
+                    submitButton.disabled = true; // Disable the button
+                }
+            });
+
+            // Initially, disable the button
+            submitButton.disabled = true;
+        });
+    </script>
+
+}

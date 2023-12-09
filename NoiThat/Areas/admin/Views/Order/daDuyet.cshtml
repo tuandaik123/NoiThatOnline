@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "daDuyet";
+    Layout = "~/Areas/admin/Views/Shared/_adminLayout.cshtml";
+}
+@using NoiThat;
+@using PagedList.Mvc;
+@model PagedList.PagedList<NoiThat.Models.order>
+<style>
+    .pagination-container {
+        text-align: center;
+        margin-top: 20px; /* Add margin for spacing */
+    }
+
+    .pagination {
+        display: inline-block;
+    }
+
+        .pagination li {
+            display: inline;
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            color: #333;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 2px solid #333;
+            border-radius: 4px;
+        }
+
+            .pagination a:hover, .pagination .active {
+                height: 40px;
+                width: 40px;
+                background-color: #333;
+                color: #fff;
+                border: 2px solid #333;
+            }
+</style>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Đơn hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Đơn hàng</a></li>
+                    <li class="breadcrumb-item active">Blank Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Email</th>
+                        <th>Ngày tạo đơn</th>
+                        <th>Tổng hóa đơn</th>
+                        <th>Thanh Toán</th>
+                        <th>Phương thức</th>
+                        <th>Tùy chỉnh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var count = 1;
+                        foreach (var i in Model)
+                        {
+                            <tr>
+                                <td>@count</td>
+                                <td>#DH@(i.id)</td>
+                                <td>@i.customer.email</td>
+                                <td>@i.date_create</td>
+                                <td>@Html.FormatValue(@i.totalPrice, "{0:#,##0}")</td>
+                                <td>@(i.paymentStatus == 0 ? "Chưa thanh toán":"Đã thanh toán")</td>
+                                <td>@i.paymentMethod</td>
+                                <td>
+                                    <a href="@Url.Action("daDuyet","OrderDetail", new {id = @i.id})" class="btn btn-sm btn-primary">Xem</a>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4">Không có bản ghi!!!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+    <div class="text-center pagination-container">
+        @Html.PagedListPager(Model , page => Url.Action("daDuyet" , new {page = page}))
+    </div>
+</section>
+
+

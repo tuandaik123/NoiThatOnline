@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "brandPartial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<NoiThat.Models.brand>
+@foreach (var i in Model)
+{
+    <option value="@i.id">@i.name</option>
+}

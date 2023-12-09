@@ -1,0 +1,71 @@
+﻿
+@{
+    ViewBag.Title = "timKienSanPham";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="jewellery_section">
+    <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+        <div class="fashion_taital_container">
+            <h1 class="fashion_taital kq">Kết Quả Tìm Kiếm...</h1>
+        </div>
+
+        <div class="fashion_section_2">
+            <div class="container">
+                <div class="row">
+                    @foreach (var pr in Model)
+                    {
+                        <div class="col-lg-4 col-sm-4">
+                            <div class="box_main">
+                                <h4 class="shirt_text">@pr.name</h4>
+                                <p class="price_text">Price <span style="color: #262626;">@Html.FormatValue(pr.price, "{0:#,##0}") VNĐ</span></p>
+                                <div class="tshirt_img"><img src="~/images/@pr.image"></div>
+                                <div class="btn_main">
+                                    <div class="buy_bt"><a href="@Url.Action("ThemGioHangttt","GioHang", new {ms = pr.id})">Buy Now</a></div>
+                                    <div class="seemore_bt"><a href="@Url.Action("chiTietSanPham","NoiThatOnline", new { id = pr.id})">See More</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Các tệp script tiếp theo của bạn ở đây -->
+
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/jquery-3.0.0.min.js"></script>
+<script src="~/js/plugin.js"></script>
+<!-- sidebar -->
+<script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="~/js/custom.js"></script>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const targetElement = document.querySelector(".kq");
+
+        if (targetElement) {
+            const targetPosition = targetElement.getBoundingClientRect().top;
+            const offset = 150;
+
+            window.scrollBy({
+                top: targetPosition - offset,
+                behavior: "smooth"
+            });
+        }
+    });
+</script>
+
+

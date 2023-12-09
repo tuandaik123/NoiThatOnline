@@ -1,0 +1,110 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/admin/Views/Shared/_adminLayout.cshtml";
+}
+
+@using NoiThat;
+@using PagedList.Mvc;
+@using PagedList;
+@model PagedList.PagedList<NoiThat.Models.order>
+
+<style>
+    .pagination-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .pagination {
+        display: inline-block;
+    }
+
+        .pagination li {
+            display: inline;
+            margin: 0 5px;
+        }
+
+        .pagination a {
+            color: #333;
+            text-decoration: none;
+            padding: 8px 16px;
+            border: 2px solid #333;
+            border-radius: 4px;
+        }
+
+            .pagination a:hover, .pagination .active {
+                background-color: #333;
+                color: #fff;
+            }
+</style>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Đơn hàng</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Đơn hàng</a></li>
+                    <li class="breadcrumb-item active">Blank Page</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Mã đơn hàng</th>
+                        <th>Email</th>
+                        <th>Ngày tạo đơn</th>
+                        <th>Tổng hóa đơn</th>
+                        <th>Thanh Toán</th>
+                        <th>Phương thức</th>
+                        <th>Tùy chỉnh</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                    {
+                        var count = Model.PageNumber * Model.PageSize - Model.PageSize + 1;
+                        foreach (var order in Model)
+                        {
+                            <tr>
+                                <td>@count</td>
+                                <td>#DH@(order.id)</td>
+                                <td>@order.customer.email</td>
+                                <td>@order.date_create</td>
+                                <td>@Html.FormatValue(order.totalPrice, "{0:#,##0}")</td>
+                                <td>@(order.paymentStatus == 0 ? "Chưa thanh toán":"Đã thanh toán")</td>
+                                <td>@order.paymentMethod</td>
+                                <td>
+                                    <a href="@Url.Action("Index", "OrderDetail", new { id = order.id })" class="btn btn-sm btn-success">Giao hàng</a>
+                                    <a href="@Url.Action("deleteView", "Order", new { id = order.id })" class="btn btn-sm btn-danger">Hủy đơn</a>
+                                </td>
+                            </tr>
+                            count++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="7">Không có bản ghi!!!</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="text-center pagination-container">
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+    </div>
+</section>

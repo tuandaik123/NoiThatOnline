@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "deleteView";
+    Layout = "~/Areas/admin/Views/Shared/_adminLayout.cshtml";
+}
+@using (Html.BeginForm("delete", "Order", new { id =  @Model.id })) {
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <label for="mota">Lý do :</label>
+                    <textarea class="form-control" rows="3" id="mota" name="lyDo"></textarea>
+                </div>
+            </form>
+            <div class="card-footer">
+            <button type="submit" class="btn btn-danger">Hủy đơn</button>
+            </div>
+        </div>
+    </div>
+</div>
+}

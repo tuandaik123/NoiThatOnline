@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<!-- Rest of your HTML -->
+
+<div class="jewellery_section">
+    <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <h4 class="tensach" style="font-size: 40px; text-align: center; color: black; font-weight: bold; margin-top:60px;">
+                            @Model.name
+                        </h4>
+                        <img src="~/Images/@Model.image" alt="@Model.name" style="width: 300px; height: 500px; object-fit: contain; display: block; margin: 0 auto;" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="motasach" style="padding-top:80px;">
+                        <p class="ngaycapnhap">Ngày cập nhật: @Html.FormatValue(@Model.ngayCapNhap, "{0:dd/MM/yyyy}")</p>
+                        <p class="giaban">Giá bán: <span style="color:blue;font-size:30px;">@Html.FormatValue(@Model.price, "{0:#,##0}") VNĐ</span></p>
+                        <p class="ngaycapnhap">Thương hiệu:<span style="font-size:20px;font-weight:bold">@Model.brand.name</span></p>
+                        <p class="ngaycapnhap">Danh mục sản phẩm: <span style="font-size:20px;font-weight:bold">@Model.category.name</span></p>
+                        <p>
+                            @Html.Raw(Model.description.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+                        </p>
+                        @using (Html.BeginForm("ThemGioHang", "GioHang", new { ms = Model.id, url = Request.Url.ToString() }))
+                        {
+                            <p>
+                                <div style="display: flex; align-items: center; margin-left: 20px">
+                                    <input type="button" style="width: 30px; height: 30px; background-color: #007BFF; color: #fff; border: none; cursor: pointer;" id="decrement" value="-">
+                                    <input style="width: 40px; text-align: center; font-size: 16px;" type="text" value="1" id="quantity" name="txtSoLuong">
+                                    <input type="button" style="width: 30px; height: 30px; background-color: #007BFF; color: #fff; border: none; cursor: pointer;" id="increment" value="+">
+                                </div>
+                            </p>
+                            <p class="addtocard">
+                                <input type="submit" value="Thêm Sản Phẩm" style="height: 50px; width: 120px; background: #007BFF; color: white; font-family: 'Times New Roman'" />
+                            </p>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/jquery-3.0.0.min.js"></script>
+<script src="~/js/plugin.js"></script>
+<!-- sidebar -->
+<script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="~/js/custom.js"></script>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const targetElement = document.querySelector(".tensach");
+
+        if (targetElement) {
+            const targetPosition = targetElement.getBoundingClientRect().top;
+            const offset = 150; 
+
+            window.scrollBy({
+                top: targetPosition - offset,
+                behavior: "smooth"
+            });
+        }
+    });
+</script>
+
+<script>
+    const decrementButton = document.getElementById('decrement');
+    const incrementButton = document.getElementById('increment');
+    const quantityInput = document.getElementById('quantity');
+
+    decrementButton.addEventListener('click', () => {
+        let currentQuantity = parseInt(quantityInput.value);
+        if (currentQuantity > 1) {
+            currentQuantity--;
+            quantityInput.value = currentQuantity;
+        }
+    });
+
+    incrementButton.addEventListener('click', () => {
+        let currentQuantity = parseInt(quantityInput.value);
+        currentQuantity++;
+        quantityInput.value = currentQuantity;
+    });
+</script>
+

@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Trang Chủ</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" href="~/css/bootstrap.min.css">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="~/css/style.css">
+    <!-- Responsive-->
+    <link rel="stylesheet" href="~/css/responsive.css">
+    <!-- fevicon -->
+    <link rel="icon" href="images/fevicon.png" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" href="~/css/jquery.mCustomScrollbar.min.css">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <!-- font awesome -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--  -->
+    <!-- owl stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Great+Vibes|Poppins:400,700&display=swap&subset=latin-ext" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/owl.carousel.min.css">
+    <link rel="stylesoeet" href="~/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css'>
+    <link rel="icon" href="~/images/icon.jpg" type="image/x-icon">
+
+    <style>
+        .vn {
+            height: 10px;
+            width: 15px;
+        }
+
+        .box_main:hover {
+            box-shadow: 0px -5px 0px 0px #888;
+        }
+
+        .hinh {
+            height: 300px;
+            width: 200px;
+            padding-top: 30px;
+            border: 2px black solid;
+        }
+
+        .login_menu a {
+            color: black;
+            text-decoration: none;
+        }
+
+        .nav1 {
+            position: relative;
+        }
+
+            .nav1.fixed {
+                position: fixed;
+                top: 0;
+                width: 100%;
+                z-index: 999;
+                background: black;
+            }
+
+        .thongbao-container {
+            position: relative;
+        }
+
+        .thongbao {
+            padding-top: 10px;
+            text-align: center;
+            z-index: 100;
+            border: hidden;
+            width: 350px;
+            position: fixed;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: top 0.3s ease; 
+        }
+        .loader-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 999;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner_bg_main ">
+        <!-- header top section start -->
+        <div class="container">
+            <div class="header_section_top">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="custom_menu">
+                            <ul>
+                                <li><a href="#">Best Sellers</a></li>
+                                <li><a href="#">Gift Ideas</a></li>
+                                <li><a href="#">New Releases</a></li>
+                                <li><a href="#">Today's Deals</a></li>
+                                <li><a href="#">Customer Service</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header top section start -->
+        <!-- logo section start -->
+        <div class="logo_section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="logo"><a href="index.html"><img src="~/images/logo1.png" style="height:200px; width:340px;"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- logo section end -->
+        <!-- header section start -->
+        <div class="navb1">
+        <div class="nav1">
+        <div class="header_section">
+            <div class="container">
+                <div class="containt_main">
+                    <div id="mySidenav" class="sidenav">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                        <a href="@Url.Action("Index", "NoiThatOnline")">Home</a>
+                        <a href="fashion.html">Sản Phẩm Mới</a>
+                        <a href="electronic.html">Bán Chạy Nhất</a>
+                        <a href="jewellery.html">Liên Hệ</a>
+                    </div>
+                    <span class="toggle_icon" onclick="openNav()"><img src="~/images/toggle-icon.png"></span>
+                    <div class="dropdown">
+                        @Html.Action("danhMucPartial", "NoiThatOnline")
+                    </div>
+                    <div class="main">
+                        <!-- Another variation with a button -->
+                        @using (Html.BeginForm("timKienSanPham", "NoiThatOnline"))
+                        {
+                            <div class="input-group">
+
+                                <input type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" name="find">
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" type="submit" style="background-color: #f26522; border-color:#f26522 ">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                    <div class="header_box">
+                        <div class="lang_box " style=" box-shadow: -10px 10px 10px rgba(0, 0, 0, 0.5);">
+                            <a href="#" title="Language" class="nav-link" data-toggle="dropdown" aria-expanded="true">
+                                <img src="~/images/vietnam.png" alt="flag" class="mr-2 vn " title="United Kingdom"> Vietnamese <i class="fa fa-angle-down ml-2" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu ">
+                                <a href="#" class="dropdown-item">
+                                    <img src="~/images/flag-france.png" class="mr-2" alt="flag">
+                                    French
+                                </a>
+                            </div>
+                        </div>
+                        <div class="login_menu">
+                            <ul>
+                                @{NoiThat.Models.customer username = Session["TaiKhoan"] as NoiThat.Models.customer;}
+                                @if (Session["TaiKhoan"] != null)
+                                {
+                                    <li>
+                                        @Html.Action("GioHangPartial", "GioHang")
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("DangXuat", "User")">
+                                            <i class="fas fa-sign-out-alt" aria-hidden="true" style="color: orange"></i>
+                                        </a>
+                                        <span style="color: orange; text-transform: lowercase; "> Hello, @username.name</span>
+                                    </li>
+                                    <li>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        @Html.Action("GioHangPartial", "GioHang")
+                                    </li>
+                                    <li>
+                                        <a href="@Url.Action("TaiKhoan", "User")">
+                                            <i class="fa fa-user" aria-hidden="true" style="color: orange"></i>
+                                            <span style="color: orange; text-transform: lowercase; ">login</span>
+                                        </a>
+                                    </li>
+                                }
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+            </div>
+            </div>
+        <!-- header section end -->
+        <!-- banner section start -->
+        <div class="banner_section layout_padding">
+            @Html.Action("sloganpartial", "NoiThatOnline")
+        </div>
+        <!-- banner section end -->
+    </div>
+    <div>
+        <div id="success-message" class="col-md-12 alert alert-success thongbao" style="display:none;">
+            <i class="fas fa-check fa-2x" style="color: #00e61b;"></i> <br />
+            Thêm vào giỏ hàng thành công. <br />
+            Vui lòng kiểm tra giỏ hàng!
+        </div>
+        <div id="success-message" class="col-md-12 alert alert-success thongbao" style="display:none;">
+            <i class="fa-solid fa-check fa-2xl" style="color: #00e61b;"></i> <br /> Thêm vào giỏ hàng thành công. <br />Vui lòng kiểm tra giỏ hàng!
+        </div>
+        <div class="loader-container" id="loader-container">
+            <div class="loader"></div>
+        </div>
+        @RenderBody()
+    </div>
+    <!-- jewellery  section end -->
+    <!-- footer section start -->
+    <div class="footer_section layout_padding">
+        <div class="container">
+            <div class="footer_logo"><a href="index.html"><img src="~/images/logo1.png" style="height:50px; width:100px;"></a></div>
+            <div class="input_bt">
+                <input type="text" class="mail_bt" placeholder="Your Email" name="Your Email">
+                <span class="subscribe_bt" id="basic-addon2"><a href="#">Subscribe</a></span>
+            </div>
+            <div class="footer_menu">
+                <ul>
+                    <li><a href="#">Best Sellers</a></li>
+                    <li><a href="#">Gift Ideas</a></li>
+                    <li><a href="#">New Releases</a></li>
+                    <li><a href="#">Today's Deals</a></li>
+                    <li><a href="#">Customer Service</a></li>
+                </ul>
+            </div>
+            <div class="location_main">Nội Thất Sky <a href="#">0999.999.999</a></div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        var nav1 = $(".nav1");
+        var scrollPosition = 320; // Khi bạn muốn .nav1 cố định
+
+        $(window).on("scroll", function () {
+            if ($(window).scrollTop() > scrollPosition) {
+                nav1.addClass("fixed"); // Thêm class "fixed" khi cuộn xuống đủ
+            } else {
+                nav1.removeClass("fixed"); // Loại bỏ class "fixed" khi ở đầu trang
+            }
+        });
+    });
+
+</script>
+<script>
+$(document).ready(function () {
+    $(".add-to-cart").click(function (e) {
+        e.preventDefault(); // Prevent the default action of the link
+
+        var maSP = $(this).data("ms");
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("ThemGioHangtt", "GioHang")',
+            data: { ms: maSP, url: window.location.href },
+            success: function () {
+                // Hiển thị thông báo khi thêm vào giỏ hàng thành công
+                $("#success-message").fadeIn().delay(1000).fadeOut();
+
+                // Load lại thông tin thanh navbar
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GioHangPartial", "GioHang")',
+                    success: function (data) {
+                        // Cập nhật nội dung của thanh navbar
+                        $('#navbar-content').html(data);
+                    },
+                });
+            },
+        });
+    });
+});
+    document.addEventListener("DOMContentLoaded", function () {
+        var loaderContainer = document.getElementById("loader-container");
+
+        // Show loader when the webpage starts loading
+        loaderContainer.style.display = "flex";
+
+        // Set a flag to track if the minimum time has passed
+        var loadingTimePassed = false;
+
+        // Start a timer to track the loading time
+        var loadingStartTime = Date.now();
+
+        // Function to check if minimum time has passed
+        function checkLoadingTime() {
+            if (!loadingTimePassed) {
+                var currentTime = Date.now();
+                var loadingTime = currentTime - loadingStartTime;
+                if (loadingTime >= 500) {
+                    // Minimum time passed, hide loader and proceed
+                    loadingTimePassed = true;
+                    loaderContainer.style.display = "none";
+                } else {
+                    // Minimum time not passed, check again later
+                    setTimeout(checkLoadingTime, 200);
+                }
+            }
+        }
+
+        // Start checking the loading time
+        checkLoadingTime();
+
+        // Hide loader after the window has loaded and minimum time has passed
+        window.addEventListener("load", function () {
+            if (loadingTimePassed) {
+                loaderContainer.style.display = "none";
+            }
+        });
+
+        // Start spinning the loader and stop after 1 second
+        setTimeout(function () {
+            loaderContainer.style.animation = "none";
+        }, 800);
+    });
+
+
+</script>

@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "addBrandView";
+    Layout = "~/Areas/admin/Views/Shared/_adminLayout.cshtml";
+}
+
+@using (Html.BeginForm("addBrand", "Category"))
+{
+    <div class="card">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="tendm">Tên hãng sản xuất</label>
+                <input type="text" class="form-control" id="tendm" name="name">
+            </div>
+            <div class="form-group">
+                <label for="mota">Mô Tả</label>
+                <textarea class="form-control" rows="3" id="mota" name="mota"></textarea>
+            </div>
+        </div>
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
+}
+

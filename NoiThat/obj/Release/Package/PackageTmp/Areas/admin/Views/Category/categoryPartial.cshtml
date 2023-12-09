@@ -1,0 +1,10 @@
+﻿
+@{
+    ViewBag.Title = "categoryPartial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@foreach (var i in Model)
+{
+    <option value="@i.id" >@i.name</option>
+}

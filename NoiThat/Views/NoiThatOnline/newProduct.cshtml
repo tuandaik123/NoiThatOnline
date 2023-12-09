@@ -1,0 +1,30 @@
+﻿
+        <div class="carousel-inner">
+            @for (var i = 0; i < Model.Count; i += 3)
+            {
+                <div class="carousel-item @if (i == 0) { <text>active</text> }">
+                    <div class="container">
+                        <h1 class="fashion_taital">Sản Phẩm Mới Nhất</h1>
+                        <div class="fashion_section_2">
+                            <div class="row">
+                                @for (var j = i; j < i + 3 && j < Model.Count; j++)
+                                {
+                                    var pr = Model[j];
+                                    <div class="col-lg-4 col-sm-4">
+                                        <div class="box_main">
+                                            <h4 class="shirt_text">@pr.name</h4>
+                                            <p class="price_text">Price <span style="color: #262626;">@Html.FormatValue(pr.price, "{0:#,##0}") VNĐ</span></p>
+                                            <div class="tshirt_img"><img src="~/images/@pr.image"></div>
+                                            <div class="btn_main">
+                                                <div class="buy_bt"><a class="add-to-cart" href="#" data-ms="@pr.id">Buy Now</a></div>
+                                                <div class="seemore_bt"><a href="@Url.Action("chiTietSanPham","NoiThatOnline", new { id = pr.id})">See More</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>

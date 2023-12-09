@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "customersPartial";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="form-group col-md-6">
+    <label for="tendm">Tên khách hàng</label>
+    <input type="text" class="form-control col-12" id="tendm" name="customerName" value="@Model.name" disabled>
+</div>
+<div class="form-group col-md-6">
+    <label for="email">Email</label>
+    <input type="text" class="form-control col-12" id="email" name="email" value="@Model.email" disabled>
+</div>
+<div class="form-group col-md-6">
+    <label for="phone">Số điện thoại</label>
+    <input type="text" class="form-control col-12" id="phone" name="phone" value="@Model.phone" disabled>
+</div>
+<div class="form-group col-md-6">
+    <label for="address">Địa chỉ</label>
+    <input type="text" class="form-control col-12" id="address" name="address" value="@Model.address" disabled>
+</div>

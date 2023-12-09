@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "quenMK";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quên mật khẩu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, black, gray);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: #fff;
+            max-width: 400px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .input-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="email"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: center;
+        }
+
+            input[type="submit"]:hover {
+                background-color: #2980b9;
+            }
+
+        .message {
+            text-align: center;
+            color: #3498db;
+        }
+
+        .sm {
+            margin-left: 50px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+...
+<body>
+    <div class="container">
+        <h2>Quên mật khẩu</h2>
+        @using (Html.BeginForm("ForgotPassword", "User"))
+        {
+            <div class="input-container">
+                <label for="email">Nhập email của bạn:</label>
+                <input type="email" id="email" name="email11" required>
+                <p style="color:red">@ViewBag.Message</p>
+            </div>
+            <input type="submit" value="Gửi yêu cầu" class="sm" id="submitBtn">
+        }
+        <p class="message" id="successMessage" style="display: none;">Một email chứa hướng dẫn khôi phục mật khẩu sẽ được gửi đến bạn.</p>
+    </div>
+
+    <script>
+        document.getElementById("submitBtn").addEventListener("click", function () {
+            // Ẩn nút Gửi yêu cầu sau khi người dùng bấm
+            this.style.display = "none";
+            // Hiển thị thông báo thành công
+            document.getElementById("successMessage").style.display = "block";
+        });
+    </script>
+</body>
+...
+
+

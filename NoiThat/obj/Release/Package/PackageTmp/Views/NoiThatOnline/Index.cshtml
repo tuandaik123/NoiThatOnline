@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<!-- banner bg main end -->
+<!-- fashion section start -->
+<div class="fashion_section">
+    <div id="main_slider" class="carousel slide" data-ride="carousel">
+            @Html.Action("newProduct", "NoiThatOnline")
+        <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+            <i class="fa fa-angle-left"></i>
+        </a>
+        <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+            <i class="fa fa-angle-right"></i>
+        </a>
+    </div>
+</div>
+<!-- fashion section end -->
+<!-- electronic section start -->
+<div class="jewellery_section">
+    <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+        <div class="fashion_taital_container">
+            <h1 class="fashion_taital">Bàn Ghế Sofa</h1>
+        </div>
+
+        <div class="fashion_section_2">
+            <div class="container">
+                <div class="row">
+                    @foreach (var pr in Model)
+                    {
+                        if (pr.category.name == "Ghế Sofa")
+                        {
+                            <div class="col-lg-4 col-sm-4">
+                                <div class="box_main">
+                                    <h4 class="shirt_text">@pr.name</h4>
+                                    <p class="price_text">Price <span style="color: #262626;">@Html.FormatValue(pr.price, "{0:#,##0}") VNĐ</span></p>
+                                    <div class="tshirt_img"><img src="~/images/@pr.image" alt="@pr.name"></div>
+                                    <div class="btn_main">
+                                        <div class="buy_bt"><a class="add-to-cart" href="#" data-ms="@pr.id">Buy Now</a></div>
+                                        <div class="seemore_bt"><a href="@Url.Action("chiTietSanPham","NoiThatOnline", new { id = pr.id})">See More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- electronic section end -->
+<!-- jewellery  section start -->
+<div class="jewellery_section">
+    <div id="jewellery_main_slider" class="carousel slide" data-ride="carousel">
+        <div class="fashion_taital_container">
+            <h1 class="fashion_taital">Đèn Chùm Cao Cấp</h1>
+        </div>
+
+        <div class="fashion_section_2">
+            <div class="container">
+                <div class="row">
+                    @foreach (var pr in Model)
+                    {
+                        if (pr.category.name == "Đèn chùm")
+                        {
+                            <div class="col-lg-4 col-sm-4">
+                                <div class="box_main grayscale-effect">
+                                    <h4 class="shirt_text">@pr.name</h4>
+                                    <p class="price_text">Price <span style="color: #262626;">@Html.FormatValue(pr.price, "{0:#,##0}") VNĐ</span></p>
+                                    <div class="tshirt_img"><img src="~/images/@pr.image" alt="@pr.name"></div>
+                                    <div class="btn_main">
+                                        <div class="buy_bt"><a class="add-to-cart" href="#" data-ms="@pr.id">Buy Now</a></div>
+                                        <div class="seemore_bt"><a href="@Url.Action("chiTietSanPham","NoiThatOnline", new { id = pr.id})">See More</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- footer section end -->
+<!-- copyright section start -->
+<div class="copyright_section">
+    <div class="container">
+        <p class="copyright_text">© 2020 All Rights Reserved. Design by <a href="https://html.design">Free html  Templates</a></p>
+    </div>
+</div>
+<!-- copyright section end -->
+<!-- Javascript files-->
+<script src="~/js/jquery.min.js"></script>
+<script src="~/js/popper.min.js"></script>
+<script src="~/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/jquery-3.0.0.min.js"></script>
+<script src="~/js/plugin.js"></script>
+<!-- sidebar -->
+<script src="~/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="~/js/custom.js"></script>
+<script>
+         function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+             }
+
+         function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+         }
+</script>
+
